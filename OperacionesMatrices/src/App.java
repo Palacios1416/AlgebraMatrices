@@ -38,7 +38,10 @@ public class App {
             case 1:
              System.out.println(":::::::::::::::::::::::::::::::::");
             System.out.println("IGUALDAD DE MATRICES");
-
+                
+                if (matrizA.length != matrizB.length) {
+                    compare = false;
+                } else {
                 System.out.println("Ingrese los elementos de la matriz: ");
                 for (int i = 0; i < sizefilas; i++) {
                     for (int j = 0; j < sizecolum; j++) {
@@ -55,16 +58,20 @@ public class App {
                     }
                 }
                 System.out.println(":::::::::::::::::::::::::::::::::");
-                
-                for (int i = 0; i < sizefilas; i++) {
+
+                    for (int i = 0; i < sizefilas; i++) {
                     for (int j = 0; j < sizecolum; j++) {
                         if (matrizA[i][j] != matrizB[i][j]) {
-                            compare = false;      
-                        }else{
-                            compare = true;
+                            compare = false; 
+                            break;     
                         }
                     }
+                    if (!compare) {
+                        break;
+                    }
+                    }
                 }
+                
                 if (compare) {
                     System.out.println("Las matrices son iguales");
                 }else{
@@ -85,7 +92,7 @@ public class App {
                         matrizA[i][j] = scan.nextInt();
                     }
                 }
-                
+                 
                 System.out.println("Ingrese los elementos de la matriz: ");
                 for (int i = 0; i < sizefilas; i++) {
                     for (int j = 0; j < sizecolum; j++) {
