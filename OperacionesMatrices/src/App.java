@@ -13,7 +13,10 @@ public class App {
                             "4) Matriz inversa aditiva\n" +
                             "5) Resta de matrices\n" +
                             "6) Escalar de matriz\n" +
-                            "7) Multiplicacion de matrices");
+                            "7) Multiplicacion de matrices\n" +
+                            "8) Crear matriz identidad\n" +
+                            "9) Obtener la inversa\n" +
+                            "10) Determinante de una matriz");
         do {
            opc = scan.nextByte(); 
         } while (opc < 1 || opc > 10);
@@ -46,7 +49,7 @@ public class App {
                     return;
                 }
                 
-                if (opc == 3 || opc == 4 || opc == 6) {
+                if (opc == 3 || opc == 4 || opc == 6 || opc == 8) {
                     System.out.println();
                 } else {
                     System.out.println("¿Cuantas filas tendra la matriz B?");
@@ -302,6 +305,44 @@ public class App {
                     System.out.println();
                 }
 
+                }
+
+                break;
+
+                case 8:
+                System.out.println(":::::::::::::::::::::::::::::::::");
+                System.out.println("CREAR MATRIZ IDENTIDAD");
+
+                if (sizecolum != sizefilas) {
+                System.out.println("Una matriz identidad debe ser cuadrada");
+                
+                } else {
+                System.out.println("La matriz identidad es: ");
+                
+                for (int i = 0; i < sizefilas; i++) {
+                    for (int j = 0; j < sizecolum; j++) {
+                        if (i == j) {
+                        matrizA[i][j] = 1;
+                      } else {
+                        matrizA[i][j] = 0;
+                      }
+                      System.out.print(matrizA[i][j] + "\t");
+                    }
+                    System.out.println();
+                }
+                }
+                
+                break;
+
+                case 9:
+                System.out.println(":::::::::::::::::::::::::::::::::");
+                System.out.println("OBTENER INVERSA");
+
+                if (sizecolum != sizefilas) {
+                    System.out.println("La matriz no es cuadrada, no tiene inversa");
+                } else {
+                    
+                    
                 }
 
                 break;
