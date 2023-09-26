@@ -1,0 +1,87 @@
+import java.util.Scanner;
+public class LibroCalificaciones {
+    public static byte cantEst, count = 3, cantReprobados= 0, cantRegular=0,
+    cantBueno=0, cantMuybueno=0, cantExcelente=0;
+    public static String codeReprobado = " ", codeRegular = " ", codeBueno = " ",
+     codeMuybueno= " ", codeExcelente= " ";
+    public static void main(String[] args) throws Exception {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Ingrese la cantidad de estudiantes");
+        do {
+            cantEst = scan.nextByte();
+            if (cantEst <= 0) { 
+                count--; 
+                System.out.println("El valor debe ser mayor que cero. Intentos restantes: " + count);
+            }
+        } while (cantEst <= 0 && count > 0);
+
+        int [] notas = new int[cantEst];
+
+        // int [] reprobado = new int[cantEst];
+        // int [] regular = new int[cantEst];
+        // int [] bueno = new int[cantEst];
+        // int [] muybueno = new int[cantEst];
+        // int [] excelente = new int[cantEst];
+        
+        for (int i = 0; i < cantEst; i++) {
+            System.out.println("Ingrese la nota del estudiante # " + (i + 1));
+            notas[i] = scan.nextInt();
+        }
+
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] <= 59) {
+                cantReprobados++;
+            }
+        }
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] >= 60 && notas[i] < 70) {
+                cantRegular++;
+            }
+        }
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] >= 70 && notas[i] < 80) {
+                cantBueno++;
+            }
+        }
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] >= 80 && notas[i] < 90) {
+                cantMuybueno++;
+            }
+        }
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] >= 90 && notas[i] < 101) {
+                cantExcelente++;
+            }
+        }
+
+            for (int i = 0; i < cantReprobados; i++) {
+                    codeReprobado += "*";
+            }
+            for (int i = 0; i < cantRegular; i++) {
+                    codeRegular += "*";
+            }
+            for (int i = 0; i < cantBueno; i++) {
+                    codeBueno += "*";
+            }
+            for (int i = 0; i < cantMuybueno; i++) {
+                    codeMuybueno += "*";
+            }
+            for (int i = 0; i < cantExcelente; i++) {
+                    codeExcelente += "*";
+            }
+
+            System.out.println("CATEGORIA (CONTEO)\t:(BARRAS)");
+            System.out.println("Reprobado (" + cantReprobados + ")" + 
+            "\t : " + codeReprobado);
+             System.out.println("Regular (" + cantRegular + ")" + 
+             "\t : " + codeRegular);
+             System.out.println("Bueno (" + cantBueno + ")" + 
+             "\t : " + codeBueno);
+             System.out.println("Muy bueno (" + cantMuybueno + ")" + 
+             "\t : " + codeMuybueno);
+             System.out.println("Excelente (" + cantExcelente + ")" + 
+             "\t : " + codeExcelente);
+             System.out.println("Total de estudiantes en el grupo: " + cantEst);
+        
+    }
+}
