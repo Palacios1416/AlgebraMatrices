@@ -3,6 +3,7 @@ public class App {
     public static byte opc, sizefilas,sizecolum, sizefilasB,sizecolumB;
     public static byte count = 3; //3 intentos, cada error sera -1
     public static boolean igualdad;
+    public static double determinante;
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
 
@@ -19,9 +20,22 @@ public class App {
                             "10) Determinante de una matriz");
         do {
            opc = scan.nextByte(); 
+           if (opc < 1 || opc > 10) { //condicion de 3-1 intentos
+                        count--; 
+                        System.out.println("El valor ingresado no es una opcion. Intentos restantes: " + count);
+                    }
         } while (opc < 1 || opc > 10);
 
-        System.out.println("¿Cuantas filas tendra la matriz A?");
+        if (count == 0) { //condicion de salida si se acabaron los intentos
+                    System.out.println("Se han agotado los intentos, ejecute de nuevo");
+                    return;
+             }
+             
+        if (opc == 9 || opc == 10) {
+            System.out.println("Debido a la complejidad de este ejercicio, la matriz establecida es de 2x2");
+           
+        } else {
+            System.out.println("¿Cuantas filas tendra la matriz A?");
                 do {
                     sizefilas = scan.nextByte(); 
                     if (sizefilas <= 0) { //condicion de 3-1 intentos
@@ -81,6 +95,7 @@ public class App {
                     }
                 }
                 
+        }
 
                 int [][] matrizA = new int[sizefilas][sizecolum];
                 int [][] matrizB = new int[sizefilasB][sizecolumB];
@@ -290,7 +305,7 @@ public class App {
                 for (int i = 0; i < sizefilas; i++) {
                     for (int j = 0; j < sizecolumB; j++) {
                         for (int k = 0; k < sizecolum; k++) {
-                            resultado[i][j] = matrizA[i][k] * matrizB[i][k];
+                            resultado[i][j] += matrizA[i][k] * matrizB[i][k];
                         }
                     }
                 }
@@ -338,16 +353,67 @@ public class App {
                 System.out.println(":::::::::::::::::::::::::::::::::");
                 System.out.println("OBTENER INVERSA");
 
-                if (sizecolum != sizefilas) {
-                    System.out.println("La matriz no es cuadrada, no tiene inversa");
-                } else {
+                System.out.println("Ingrese los elementos de la matriz A: ");
+                int matriz[][] = new int[2][2];
+                for (int i = 0; i < 2; i++) {
+                    for (int j = 0; j < 2; j++) {
+                        System.out.print("Matriz A [" + i + "," + j + "] = ");
+                        matriz[i][j] = scan.nextInt();
+                    }
+                }
+                            
+                    double determinante = matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0];
+                            
+                            if (determinante == 0) {
+                                System.out.println("La matriz no tiene inversa porque su determinante es cero.");
+                                return;
+                            }
+                            
+                            //calculo de matriz adjunta
+                            double[][] matrizAdjunta = {{matriz[1][1], -matriz[0][1]}, {-matriz[1][0], matriz[0][0]}};
+                            
+                            // calculo de la matriz inversa
+                            double[][] matrizInversa = new double[2][2];
+                            for (int i = 0; i < 2; i++) {
+                                for (int j = 0; j < 2; j++) {
+                                    matrizInversa[i][j] = matrizAdjunta[i][j] / determinante;
+                                }
+                            }
+                            System.out.println(":::::::::::::::::::::::::::::::::");
+                            System.out.println("La Matriz Inversa es: ");
+                            for (int i = 0; i < 2; i++) {
+                                for (int j = 0; j < 2; j++) {
+                                    System.out.print(matrizInversa[i][j] + " ");
+                                }
+                                System.out.println();
+                            }
+                
+                    
+                break;
+
+                case 10:
+                System.out.println(":::::::::::::::::::::::::::::::::");
+                System.out.println("DETERMINANTE DE UNA MATRIZ");
+
+                System.out.println("Ingrese los elementos de la matriz A: ");
+                int matrizDet[][] = new int[2][2];
+                for (int i = 0; i < 2; i++) {
+                    for (int j = 0; j < 2; j++) {
+                        System.out.print("Matriz A [" + i + "," + j + "] = ");
+                        matrizDet[i][j] = scan.nextInt();
+                    }
+                }
+                            
+                    determinante = matrizDet[0][0] * matrizDet[1][1] - matrizDet[0][1] * matrizDet[1][0];
+
+                    System.out.println("::::::::::::::::::::::::::::::::");
+                    System.out.println("El determinante es: " + determinante);
+                break;
+            }
                     
                     
                 }
 
-                break;
-        }
-        
-
+               
     }
-}
+
